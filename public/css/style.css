@@ -1,0 +1,95 @@
+* {
+    margin: center;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.form-control {
+    text-align: center;
+    flex-direction: column;
+    margin-bottom: 0.5em;
+}
+
+.form-control label {
+    margin-bottom: 0.3em;
+}
+
+.form-checkbox {
+    flex-direction: row;
+}
+
+.form-checkbox input {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+
+.form-control input {
+    padding: 5px;
+}
+
+
+.envia {
+    margin: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.container .item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    flex: 1 1 29%;
+    max-width: 29%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+}
+
+.item h2,
+.item p {
+    margin-bottom: 0.8em;
+}
+
+.actions{
+    display: flex;
+}
+
+.actions a,
+.actions input{
+    border: 1px solid #888;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: #fff;
+    padding: 5px;
+    font-size: 15px;
+    color: black;
+    cursor:pointer
+
+}
+
+.actions .details-bnt{
+ border-color: blue ;
+ color: #2770dd;
+ margin-bottom: 10px;
+ margin-right: 10px;
+}
+
+.botao-delete{
+    border-color: rgb(212, 34, 34) ;
+    color: rgb(221, 48, 39);
+}
+
+.actions.edit-bnt{
+    border-color: rgb(123, 171, 3) ;
+    color: #3f9600;
+}
