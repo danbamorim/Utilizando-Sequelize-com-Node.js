@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const conn = require('./db/conn')
 const User = require('./models/User')
 const app = express()
+const Address = require('./models/Address')
 
 
 app.use(
@@ -32,8 +33,16 @@ app.post('/users/delete/:id', async (req, res) => {
 
 app.get('/users/edit/:id', async (req, res) => {
     const id = req.params.id
-    const user = await User.findOne({ raw: true, where: { id: id } })
-    res.render('useredit', { user })
+    const user = await User.findOne({ include: Address, where: { id: id } })
+
+    if (user) {
+        res.render('useredit', { user: user.get({ plain: true }) });
+      } else {
+        // Lidar com o caso em que o usuário não é encontrado
+        res.status(404).send('Usuário não encontrado');
+      }
+      
+
 })
 
 
@@ -54,7 +63,7 @@ app.post('/users/create', async (req, res) => {
 
 
 
-app.post('/users/update',async (req, res) => {
+app.post('/users/update', async (req, res) => {
     const id = req.body.id
     const name = req.body.name
     const occupation = req.body.occupation
@@ -65,17 +74,36 @@ app.post('/users/update',async (req, res) => {
         newsletter = true
     } else { newsletter = false }
 
-    const userData ={
+    const userData = {
         id,
         name,
         occupation,
         newsletter
     }
 
-    await User.update(userData, {where: {id:id}})
+    await User.update(userData, { where: { id: id } })
 
     res.redirect('/')
 
+})
+
+
+
+app.post('/address/create', async (req, res) => {
+    const UserId = req.body.Userid
+    const street = req.body.street
+    const number = req.body.number
+    const city = req.body.city
+
+    const address = {
+        UserId,
+        street,
+        number,
+        city,
+    }
+    await Address.create(address)
+
+    res.redirect('/users/edit/${ UserId}')
 })
 
 
